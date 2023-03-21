@@ -22,7 +22,8 @@ module RiseUp
     end
 
     def init!
-      @authorization_base_64 = Base64.encode64("#{public_key}:#{private_key}")
+      self.authorization_base_64 = Base64.encode64("#{public_key}:#{private_key}")
+      self
     end
 
 
