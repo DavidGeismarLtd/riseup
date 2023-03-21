@@ -11,7 +11,7 @@ module RiseUp
     include RiseUp::Client::Users
     include RiseUp::Client::Authentication
     include RiseUp::Client::TrainingSubscriptions
-     attr_accessor :public_key, :private_key, :authorization_base_64
+     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details
      base_uri 'https://app.360learning.com/api/v1'
 
      def initialize(options = {})
