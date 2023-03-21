@@ -2,7 +2,7 @@
 
 module RiseUp
   class Client
-    module Users
+    module TrainingSubscriptions
       BASE = '/trainingsubscriptions'
       def create_training_subscription(training_id, user_id)
         request(TrainingSubscription) do
