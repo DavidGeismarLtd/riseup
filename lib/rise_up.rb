@@ -2,7 +2,10 @@
 
 require_relative "riseup/version"
 
-module Riseup
+module RiseUp
   class Error < StandardError; end
+  class AuthTokenExpiredError < StandardError; end
+
+
   # Your code goes here...
 end
