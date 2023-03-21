@@ -4,10 +4,10 @@ module RiseUp
   class Client
     module Users
       BASE = '/users'
-      def create(user_id, training_id, options = {})
+      def create_user(username options = {})
         request(User) do
           self.class.post(BASE, {
-                            body: options.merge(iduser: user_id, idtraining: training_id).to_query,
+                            body: options.merge(username:).to_query,
                             headers: {
                               'Content-Type' => 'application/x-www-form-urlencoded'
                             }

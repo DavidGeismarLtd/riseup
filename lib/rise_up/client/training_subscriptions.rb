@@ -4,16 +4,16 @@ module RiseUp
   class Client
     module TrainingSubscriptions
       BASE = '/trainingsubscriptions'
-      def create_training_subscription(training_id, user_id)
-        request(TrainingSubscription) do
+      def create_training_subscription(user_id, training_id, options = {})
+        request(User) do
           self.class.post(BASE, {
-                            body: options.to_query,
+                            body: options.merge(iduser: user_id, idtraining: training_id).to_query,
                             headers: {
                               'Content-Type' => 'application/x-www-form-urlencoded'
                             }
                           }).body
         end
-     end
+      end
     end
   end
 end
