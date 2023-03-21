@@ -3,8 +3,8 @@
 require_relative "lib/riseup/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "riseup"
-  spec.version = Riseup::VERSION
+  spec.name = "rise_up"
+  spec.version = RiseUp::VERSION
   spec.authors = ["davidgeismarltd"]
   spec.email = ["davidgeismar@yunoo.io"]
 
