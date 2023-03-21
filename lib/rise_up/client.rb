@@ -1,6 +1,16 @@
+require 'httparty'
+require 'rise_up/resource'
+require 'rise_up/user'
+require 'rise_up/training_subscription'
+require 'rise_up/client/users'
+require 'rise_up/client/authentication'
+require 'rise_up/client/training_subscriptions'
 module RiseUp
   class Client
-     include HTTParty
+    include HTTParty
+    include Learning360::Client::Users
+    include Learning360::Client::Authentication
+    include Learning360::Client::TrainingSubscriptions
      attr_accessor :public_key, :private_key, :authorization_base_64
      base_uri 'https://app.360learning.com/api/v1'
 
