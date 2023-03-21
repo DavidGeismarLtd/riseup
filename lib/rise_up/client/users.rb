@@ -14,6 +14,16 @@ module RiseUp
                           }).body
         end
       end
+
+      def get_user(id)
+       request(User) do
+         self.class.get("#{BASE}/#{id}", {
+                          headers: {
+                            'Content-Type' => 'application/json'
+                          }
+                        }).body
+       end
+      end
     end
   end
 end
