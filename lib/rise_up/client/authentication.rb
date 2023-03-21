@@ -13,7 +13,6 @@ module RiseUp
                                         'Content-Type' => 'application/x-www-form-urlencoded'
                                       }
                                     })
-
          response = JSON.parse(response.body)
          self.access_token_details = response
          response

@@ -12,7 +12,7 @@ module RiseUp
     include RiseUp::Client::Authentication
     include RiseUp::Client::TrainingSubscriptions
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details
-    base_uri 'https://api.riseup.ai'
+    base_uri 'https://api.riseup.ai/v3'
 
      def initialize(options = {})
       options.each do |key, value|
