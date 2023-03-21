@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lib/riseup/version"
+require_relative "lib/rise_up/version"
 
 Gem::Specification.new do |spec|
   spec.name = "rise_up"
