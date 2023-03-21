@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "rise_up/version"
+require "rise_up/version"
+require "rise_up/client"
 
 module RiseUp
   class Error < StandardError; end
