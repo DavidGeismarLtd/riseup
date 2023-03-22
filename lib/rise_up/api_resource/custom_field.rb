@@ -1,6 +1,6 @@
 module RiseUp
   module ApiResource
-    class Module < Resource
+    class CustomField < Resource
     end
   end
 end

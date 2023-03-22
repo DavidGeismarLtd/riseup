@@ -1,6 +1,6 @@
 module RiseUp
   module ApiResource
-    class Module < Resource
+    class Group < Resource
     end
   end
 end
