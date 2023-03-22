@@ -5,7 +5,7 @@ module RiseUp
     module TrainingSubscriptions
       BASE = '/trainingsubscriptions'
       def create_training_subscription(user_id, training_id, options = {})
-        request(ApiResource::TrainingSubcription) do
+        request(ApiResource::TrainingSubscription) do
           self.class.post(BASE, {
                             body: options.merge(iduser: user_id, idtraining: training_id).to_query,
                             headers: {
