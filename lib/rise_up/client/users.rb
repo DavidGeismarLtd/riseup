@@ -7,10 +7,10 @@ module RiseUp
       def create_user(username, options = {})
         request(ApiResource::User) do
           self.class.post(BASE, {
-                            body: options.merge(username:).to_query,
+                            body: options.merge(username:).to_json,
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
-                              'Content-Type' => 'application/x-www-form-urlencoded'
+                              'Content-Type' => 'application/json'
                             }
                           }).body
         end

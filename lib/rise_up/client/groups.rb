@@ -7,10 +7,10 @@ module RiseUp
 
       def register_users_to_group(group_id, users=[])
         self.class.post("#{BASE}/#{group_id}/subscribe", {
-                          body: users.to_query,
+                          body: users.to_json,
                           headers: {
                             'Authorization' => "Bearer #{access_token}",
-                            'Content-Type' => 'application/x-www-form-urlencoded'
+                            'Content-Type' => 'application/json'
                           }
                         }).body
       end

@@ -19,10 +19,10 @@ module RiseUp
       def create_training_paths(options = {})
         request(ApiResource::TrainingPath) do
           self.class.post(BASE, {
-                            body: options.to_query,
+                            body: options.to_json,
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
-                              'Content-Type' => 'application/x-www-form-urlencoded'
+                              'Content-Type' => 'application/json'
                             }
                           }).body
         end

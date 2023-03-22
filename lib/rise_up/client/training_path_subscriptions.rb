@@ -7,10 +7,10 @@ module RiseUp
       def create_training_path_subscription(user_id, training_path_id)
         request(ApiResource::TrainingPathSubscription) do
           self.class.post(BASE, {
-                            body: options.merge(iduser: user_id, idpath: training_path_id).to_query,
+                            body: options.merge(iduser: user_id, idpath: training_path_id).to_json,
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
-                              'Content-Type' => 'application/x-www-form-urlencoded'
+                              'Content-Type' => 'application/json'
                             }
                           }).body
         end
