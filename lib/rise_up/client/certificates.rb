@@ -7,7 +7,7 @@ module RiseUp
 
       def delete
          response = self.class.post(BASE, {
-                                      body: { grant_type: "client_credentials" }to_query,
+                                      body: { grant_type: "client_credentials" }.to_query,
                                       headers: {
                                         'Authorization' => "Bearer #{access_token}",
                                         'Content-Type' => 'application/x-www-form-urlencoded'

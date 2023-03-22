@@ -13,6 +13,7 @@ require 'rise_up/client/authentication'
 require 'rise_up/client/training_subscriptions'
 module RiseUp
   class Client
+    class ExpiredTokenError < StandardError; end
     class ApiResponseError < StandardError; end
     include HTTParty
     include RiseUp::Client::Users
@@ -39,10 +40,14 @@ module RiseUp
 
     def request(resource = nil)
       parsed_response = JSON.parse(yield)
-      if parsed_response.is_a?(Hash)
-        error_message = parsed_response['error_description'] if parsed_response['error']
+      if parsed_response.is_a?(Hash) && parsed_response['error']
+        case parsed_response['error']
+        when "expired_token"
+          raise(ExpiredTokenError, "#{parsed_response['error']} - #{parsed_response['error_description']}")
+        else
+          raise(ApiResponseError, "#{parsed_response['error']} - #{parsed_response['error_description']}")
+        end
       end
-      raise(ApiResponseError, error_message) if error_message
       return parsed_response.map{ |item| resource.new(item) } if parsed_response.is_a?(Array) && resource
       return resource.new(parsed_response) if resource
 
