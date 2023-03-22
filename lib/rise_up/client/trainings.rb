@@ -6,7 +6,7 @@ module RiseUp
       BASE = '/trainings'
 
       def retrieve_trainings
-        request(Training) do
+        request(ApiResource::Training) do
          self.class.get(BASE, {
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",

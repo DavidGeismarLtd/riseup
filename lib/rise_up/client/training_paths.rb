@@ -6,7 +6,7 @@ module RiseUp
       BASE = '/trainingpaths'
 
       def retrieve_training_paths
-        request(TrainingPath) do
+        request(ApiResource::TrainingPath) do
          self.class.get(BASE, {
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
@@ -17,7 +17,7 @@ module RiseUp
       end
 
       def create_training_paths(options = {})
-        request(TrainingPath) do
+        request(ApiResource::TrainingPath) do
           self.class.post(BASE, {
                             body: options.to_query,
                             headers: {

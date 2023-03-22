@@ -5,7 +5,7 @@ module RiseUp
     module Users
       BASE = '/users'
       def create_user(username, options = {})
-        request(User) do
+        request(ApiResource::User) do
           self.class.post(BASE, {
                             body: options.merge(username:).to_query,
                             headers: {
@@ -17,7 +17,7 @@ module RiseUp
       end
 
       def get_user(id)
-       request(User) do
+       request(ApiResource::User) do
          self.class.get("#{BASE}/#{id}", {
                           headers: {
                             'Authorization' => "Bearer #{access_token}",
