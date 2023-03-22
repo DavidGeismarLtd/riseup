@@ -5,7 +5,9 @@ require 'rise_up/api_resource/training_subscription'
 require 'rise_up/api_resource/training_path_subscription'
 require 'rise_up/api_resource/training'
 require 'rise_up/api_resource/training_path'
+require 'rise_up/api_resource/session'
 require 'rise_up/client/users'
+require 'rise_up/client/sessions'
 require 'rise_up/client/trainings'
 require 'rise_up/client/training_paths'
 require 'rise_up/client/training_path_subscriptions'
@@ -22,6 +24,7 @@ module RiseUp
     include RiseUp::Client::TrainingPathSubscriptions
     include RiseUp::Client::Trainings
     include RiseUp::Client::TrainingPaths
+    include RiseUp::Client::Sessions
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token
     base_uri 'https://api.riseup.ai/v3'
 
