@@ -4,7 +4,7 @@ module RiseUp
   class Client
     module Users
       BASE = '/users'
-      def create_user(username options = {})
+      def create_user(username, options = {})
         request(User) do
           self.class.post(BASE, {
                             body: options.merge(username:).to_query,
