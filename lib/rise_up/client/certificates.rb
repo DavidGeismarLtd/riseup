@@ -9,7 +9,7 @@ module RiseUp
          response = self.class.post(BASE, {
                                       body: { grant_type: "client_credentials" }to_query,
                                       headers: {
-                                        'Authorization' => "Basic #{authorization_base_64}",
+                                        'Authorization' => "Bearer #{access_token}",
                                         'Content-Type' => 'application/x-www-form-urlencoded'
                                       }
                                     })

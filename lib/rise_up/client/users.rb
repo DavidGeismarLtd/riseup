@@ -9,6 +9,7 @@ module RiseUp
           self.class.post(BASE, {
                             body: options.merge(username:).to_query,
                             headers: {
+                              'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/x-www-form-urlencoded'
                             }
                           }).body
@@ -19,6 +20,7 @@ module RiseUp
        request(User) do
          self.class.get("#{BASE}/#{id}", {
                           headers: {
+                            'Authorization' => "Bearer #{access_token}",
                             'Content-Type' => 'application/json'
                           }
                         }).body

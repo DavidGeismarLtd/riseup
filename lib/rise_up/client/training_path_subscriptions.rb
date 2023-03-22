@@ -9,6 +9,7 @@ module RiseUp
           self.class.post(BASE, {
                             body: options.merge(iduser: user_id, idpath: training_path_id).to_query,
                             headers: {
+                              'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/x-www-form-urlencoded'
                             }
                           }).body

@@ -15,6 +15,7 @@ module RiseUp
                                     })
          response = JSON.parse(response.body)
          self.access_token_details = response
+         self.access_token = response["access_token"]
          response
        end
     end

@@ -9,6 +9,7 @@ module RiseUp
         request(TrainingPath) do
          self.class.get(BASE, {
                                      headers: {
+                                       'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
                                      }
                                    }).body
@@ -20,6 +21,7 @@ module RiseUp
           self.class.post(BASE, {
                             body: options.to_query,
                             headers: {
+                              'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/x-www-form-urlencoded'
                             }
                           }).body

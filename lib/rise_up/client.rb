@@ -20,7 +20,7 @@ module RiseUp
     include RiseUp::Client::TrainingPathSubscriptions
     include RiseUp::Client::Trainings
     include RiseUp::Client::TrainingPaths
-    attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details
+    attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token
     base_uri 'https://api.riseup.ai/v3'
 
      def initialize(options = {})

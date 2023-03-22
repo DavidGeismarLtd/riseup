@@ -9,6 +9,7 @@ module RiseUp
         request(Training) do
          self.class.get(BASE, {
                                      headers: {
+                                       'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
                                      }
                                    }).body
