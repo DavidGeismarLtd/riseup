@@ -13,6 +13,7 @@ require 'rise_up/client/authentication'
 require 'rise_up/client/training_subscriptions'
 module RiseUp
   class Client
+    class ApiResponseError < StandardError; end
     include HTTParty
     include RiseUp::Client::Users
     include RiseUp::Client::Authentication
