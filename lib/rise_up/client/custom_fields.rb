@@ -3,7 +3,7 @@
 module RiseUp
   class Client
     module CustomFields
-      BASE = '/custom_fields'
+      BASE = '/customfields'
 
       def retrieve_custom_fields
         request(ApiResource::CustomField) do
