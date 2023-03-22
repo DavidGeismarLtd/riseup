@@ -20,9 +20,9 @@ require 'rise_up/client/modules'
 require 'rise_up/client/groups'
 require 'rise_up/client/custom_fields'
 module RiseUp
+  class ExpiredTokenError < StandardError; end
+  class ApiResponseError < StandardError; end
   class Client
-    class ExpiredTokenError < StandardError; end
-    class ApiResponseError < StandardError; end
     include HTTParty
     include RiseUp::Client::Users
     include RiseUp::Client::Authentication
