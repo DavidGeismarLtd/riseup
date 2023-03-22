@@ -29,7 +29,7 @@ module RiseUp
 
     def request(resource = nil)
       parsed_response = JSON.parse(yield)
-      error_message = parsed_response['error'] || parsed_response['message'] if parsed_response.is_a? Hash
+      error_message = parsed_response['error_description'] if parsed_response['error']
       raise(ApiResponseError, error_message) if error_message
       return parsed_response.map{ |item| resource.new(item) } if parsed_response.is_a?(Array) && resource
       return resource.new(parsed_response) if resource
