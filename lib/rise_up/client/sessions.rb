@@ -15,9 +15,10 @@ module RiseUp
          end
       end
 
-      def retrieve_sessions
+      def retrieve_sessions(options = {})
         request(ApiResource::Session) do
          self.class.get(BASE, {
+                                     query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
