@@ -1,12 +1,10 @@
-# frozen_string_literal: true
-
 module RiseUp
   class Client
-    module Sessions
-      BASE = '/sessions'
+    module SessionSubscriptions
+      BASE = '/sessionsubscriptions'
 
-      def get_session(session_id)
-         request(ApiResource::Session) do
+      def get_session_subscriptions(session_id)
+         request(ApiResource::SessionSubscription) do
            self.class.get("#{BASE}/#{session_id}", {
                                        headers: {
                                          'Content-Type' => 'application/json'
@@ -15,9 +13,10 @@ module RiseUp
          end
       end
 
-      def retrieve_sessions
+      def retrieve_sessions(options = {})
         request(ApiResource::Session) do
          self.class.get(BASE, {
+                                    query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'

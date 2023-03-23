@@ -15,9 +15,10 @@ module RiseUp
                         }).body
       end
 
-      def retrieve_groups
+      def retrieve_groups(options = {})
         request(ApiResource::Group) do
          self.class.get(BASE, {
+                                     query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'

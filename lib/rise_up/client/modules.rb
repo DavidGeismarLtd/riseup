@@ -5,9 +5,10 @@ module RiseUp
     module Modules
       BASE = '/modules'
 
-      def retrieve_modules
+      def retrieve_modules(options = {})
         request(ApiResource::Module) do
          self.class.get(BASE, {
+                                     query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'

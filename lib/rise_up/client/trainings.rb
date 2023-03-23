@@ -5,9 +5,11 @@ module RiseUp
     module Trainings
       BASE = '/trainings'
 
-      def retrieve_trainings
+      def retrieve_trainings(options = {})
         request(ApiResource::Training) do
          self.class.get(BASE, {
+
+                                     query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
