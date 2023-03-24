@@ -9,11 +9,13 @@ require 'rise_up/api_resource/session'
 require 'rise_up/api_resource/module'
 require 'rise_up/api_resource/group'
 require 'rise_up/api_resource/custom_field'
+require 'rise_up/api_resource/session_group'
 require 'rise_up/client/users'
 require 'rise_up/client/sessions'
 require 'rise_up/client/trainings'
 require 'rise_up/client/training_paths'
 require 'rise_up/client/training_path_subscriptions'
+require 'rise_up/client/session_groups'
 require 'rise_up/client/authentication'
 require 'rise_up/client/training_subscriptions'
 require 'rise_up/client/modules'
@@ -30,6 +32,7 @@ module RiseUp
     include RiseUp::Client::TrainingPathSubscriptions
     include RiseUp::Client::Trainings
     include RiseUp::Client::TrainingPaths
+    include RiseUp::Client::SessionGroups
     include RiseUp::Client::Sessions
     include RiseUp::Client::Groups
     include RiseUp::Client::CustomFields
