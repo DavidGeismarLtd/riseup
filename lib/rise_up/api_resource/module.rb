@@ -1,6 +1,6 @@
 module RiseUp
   module ApiResource
-    class Session < Resource
+    class Module < Resource
     end
   end
 end
