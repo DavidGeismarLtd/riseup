@@ -11,6 +11,7 @@ require 'rise_up/api_resource/group'
 require 'rise_up/api_resource/session_group_subscription'
 require 'rise_up/api_resource/custom_field'
 require 'rise_up/api_resource/skill'
+require 'rise_up/api_resource/training_category'
 require 'rise_up/api_resource/session_group'
 require 'rise_up/client/users'
 require 'rise_up/client/sessions'
@@ -25,6 +26,7 @@ require 'rise_up/client/training_subscriptions'
 require 'rise_up/client/modules'
 require 'rise_up/client/groups'
 require 'rise_up/client/custom_fields'
+require 'rise_up/client/training_categories'
 module RiseUp
   class ExpiredTokenError < StandardError; end
   class ApiResponseError < StandardError; end
@@ -43,6 +45,7 @@ module RiseUp
     include RiseUp::Client::CustomFields
     include RiseUp::Client::Modules
     include RiseUp::Client::Skills
+    include RiseUp::Client::TrainingCategories
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token
     base_uri 'https://api.riseup.ai/v3'
 
