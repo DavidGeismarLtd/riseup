@@ -35,7 +35,7 @@ module RiseUp
     include RiseUp::Client::Trainings
     include RiseUp::Client::TrainingPaths
     include RiseUp::Client::SessionGroups
-    include RiseUp::Client::SessionGroupSubscription
+    include RiseUp::Client::SessionGroupSubscriptions
     include RiseUp::Client::Sessions
     include RiseUp::Client::Groups
     include RiseUp::Client::CustomFields
