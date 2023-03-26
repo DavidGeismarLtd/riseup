@@ -10,9 +10,11 @@ require 'rise_up/api_resource/module'
 require 'rise_up/api_resource/group'
 require 'rise_up/api_resource/session_group_subscription'
 require 'rise_up/api_resource/custom_field'
+require 'rise_up/api_resource/skill'
 require 'rise_up/api_resource/session_group'
 require 'rise_up/client/users'
 require 'rise_up/client/sessions'
+require 'rise_up/client/skills'
 require 'rise_up/client/trainings'
 require 'rise_up/client/training_paths'
 require 'rise_up/client/training_path_subscriptions'
@@ -40,6 +42,7 @@ module RiseUp
     include RiseUp::Client::Groups
     include RiseUp::Client::CustomFields
     include RiseUp::Client::Modules
+    include RiseUp::Client::Skills
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token
     base_uri 'https://api.riseup.ai/v3'
 
