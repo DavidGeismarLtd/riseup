@@ -4,7 +4,7 @@ module RiseUp
   class Client
     module TrainingCategories
       BASE = '/trainingcategories'
-      alias_method :retrieve_categories, :retrieve_training_categories,
+      alias_method :retrieve_categories, :retrieve_training_categories
 
       def retrieve_training_categories(options = {})
         request(ApiResource::TrainingCategory) do
