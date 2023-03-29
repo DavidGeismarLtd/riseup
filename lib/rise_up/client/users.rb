@@ -16,6 +16,20 @@ module RiseUp
         end
       end
 
+
+      def retrieve_users(options = {})
+        request(ApiResource::Training) do
+         self.class.get(BASE, {
+
+                                     query: options,
+                                     headers: {
+                                       'Authorization' => "Bearer #{access_token}",
+                                       'Content-Type' => 'application/json'
+                                     }
+                                   }).body
+         end
+      end
+
       def get_user(id)
        request(ApiResource::User) do
          self.class.get("#{BASE}/#{id}", {
