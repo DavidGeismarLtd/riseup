@@ -61,7 +61,7 @@ module RiseUp
       self
     end
 
-
+# "1ef7a484f8e4e76ed9c0c7bc6af1b08ef5cb045f"
     def request(resource = nil)
       parsed_response = JSON.parse(yield)
       if parsed_response.is_a?(Hash) && parsed_response['error']

@@ -23,7 +23,8 @@ module RiseUp
           self.class.post(BASE, {
                             body: options.to_query,
                             headers: {
-                              'Content-Type' => 'application/x-www-form-urlencoded'
+                              'Content-Type' => 'application/x-www-form-urlencoded',
+                              'Authorization' => "Bearer #{access_token}"
                             }
                           }).body
         end

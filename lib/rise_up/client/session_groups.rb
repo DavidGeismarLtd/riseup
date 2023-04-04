@@ -9,6 +9,7 @@ module RiseUp
          request(ApiResource::SessionGroup) do
            self.class.get("#{BASE}/#{session_group_id}", {
                                        headers: {
+                                         'Authorization' => "Bearer #{access_token}",
                                          'Content-Type' => 'application/json'
                                        }
                                      }).body
