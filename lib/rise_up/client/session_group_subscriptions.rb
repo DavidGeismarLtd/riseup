@@ -16,7 +16,7 @@ module RiseUp
       end
 
       def retrieve_session_group_subscriptions(options = {})
-        request(ApiResource::Session) do
+        request(ApiResource::SessionGroupSubscription) do
          self.class.get(BASE, {
                                     query: options,
                                      headers: {
