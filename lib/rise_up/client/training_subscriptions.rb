@@ -16,6 +16,16 @@ module RiseUp
         end
       end
 
+      def delete_training_subscription(training_subscription_id)
+          self.class.delete("#{BASE}/#{training_subscription_id}", {
+                            headers: {
+                              'Authorization' => "Bearer #{access_token}",
+                              'Content-Type' => 'application/json'
+                            }
+                          }).body
+      end
+
+
       def retrieve_training_subscriptions(options = {})
         request(ApiResource::TrainingSubscription) do
          self.class.get(BASE, {

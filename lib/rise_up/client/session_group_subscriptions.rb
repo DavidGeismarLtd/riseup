@@ -15,6 +15,15 @@ module RiseUp
         end
       end
 
+      def delete_session_group_subscription(session_group_subscription_id)
+        self.class.delete("#{BASE}/#{session_group_subscription_id}", {
+                          headers: {
+                            'Authorization' => "Bearer #{access_token}",
+                            'Content-Type' => 'application/json'
+                          }
+                        }).body
+      end
+
       def retrieve_session_group_subscriptions(options = {})
         request(ApiResource::SessionGroupSubscription) do
          self.class.get(BASE, {

@@ -29,10 +29,10 @@ module RiseUp
         end
       end
 
-      def unregister_users_to_group(group_id,options = {})
+      def unregister_users_to_group(group_id, users = [])
         request(ApiResource::User) do
           self.class.post("#{BASE}/#{group_id}/unsubscribe", {
-            body: options.to_json,
+            body: users.to_json,
             headers: {
               'Authorization' => "Bearer #{access_token}",
               'Content-Type' => 'application/json'
@@ -40,7 +40,7 @@ module RiseUp
           }).body
         end
       end
-      
+
       def retrieve_groups(options = {})
         request(ApiResource::Group) do
          self.class.get(BASE, {
