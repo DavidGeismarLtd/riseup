@@ -25,6 +25,17 @@ module RiseUp
                           }).body
       end
 
+      def retrieve_training_subscription(training_subscription_id)
+        request(ApiResource::TrainingSubscription) do
+         self.class.get("#{BASE}/#{training_subscription_id}", {
+                                     query: options,
+                                     headers: {
+                                       'Authorization' => "Bearer #{access_token}",
+                                       'Content-Type' => 'application/json'
+                                     }
+                                   }).body
+         end
+      end
 
       def retrieve_training_subscriptions(options = {})
         request(ApiResource::TrainingSubscription) do
