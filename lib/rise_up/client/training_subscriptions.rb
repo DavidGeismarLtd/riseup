@@ -25,7 +25,7 @@ module RiseUp
                           }).body
       end
 
-      def retrieve_training_subscription(training_subscription_id)
+      def retrieve_training_subscription(training_subscription_id, options={})
         request(ApiResource::TrainingSubscription) do
          self.class.get("#{BASE}/#{training_subscription_id}", {
                                      query: options,
