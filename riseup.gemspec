@@ -5,11 +5,11 @@ require_relative "lib/rise_up/version"
 Gem::Specification.new do |spec|
   spec.name = "rise_up"
   spec.version = RiseUp::VERSION
-  spec.authors = ["davidgeismarltd"]
+  spec.authors = ["Yunoo Ltd"]
   spec.email = ["davidgeismar@yunoo.io"]
 
-  spec.summary = "wrapper for 360 riseup api"
-  spec.description = "wrapper for 360 riseup api"
+  spec.summary = "wrapper for riseup api"
+  spec.description = "wrapper for riseup api"
   # spec.homepage = "www.yunoo.io"
   spec.required_ruby_version = ">= 2.6.0"
 

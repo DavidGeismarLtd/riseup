@@ -21,3 +21,8 @@ module RiseUp
     end
   end
 end
+# curl -X POST \
+#   --header "Content-Type: application/x-www-form-urlencoded" \
+#   --header "Authorization: Basic NWRhMTI0ZDAzMTVkNjM4MjQwZjBjNmE3YThjN2U1OTY6MzQ3MjI3NzhmNDQ5NzNlMTc4OTVkNDY1YzNhZjdmNDI=" \
+#   -d "grant_type=client_credentials" \
+#   https://yunoo.riseup.ai/oauth/token
