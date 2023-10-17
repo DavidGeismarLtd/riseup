@@ -8,13 +8,12 @@ module RiseUp
       def create_module(options={})
         request(ApiResource::Module) do
           self.class.post(BASE, {
-              query: options,
-              headers: {
-                'Authorization' => "Bearer #{access_token}",
-                'Content-Type' => 'application/json'
-              }
-            }).body
-          end
+            query: options,
+            headers: {
+              'Authorization' => "Bearer #{access_token}",
+              'Content-Type' => 'application/json'
+            }
+          }).body
         end
       end
 
