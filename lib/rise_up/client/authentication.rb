@@ -22,11 +22,11 @@ module RiseUp
       def refresh_access_token
         response = authenticate
         token_storage.update(
-          access_token: response["access_token"],
-          acces_token_details: response
+          rise_up_access_token_details: response
         )
+        self.access_token = response["access_token"]
+        response
       end
-
     end
   end
 end
