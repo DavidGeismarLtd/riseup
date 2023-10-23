@@ -46,7 +46,7 @@ module RiseUp
     include RiseUp::Client::Modules
     include RiseUp::Client::Skills
     include RiseUp::Client::TrainingCategories
-    attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token
+    attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token, :token_storage
     base_uri 'https://api.riseup.ai/v3'
 
      def initialize(options = {})
@@ -63,31 +63,58 @@ module RiseUp
 
 # "1ef7a484f8e4e76ed9c0c7bc6af1b08ef5cb045f"
     def request(resource = nil)
-      parsed_response = JSON.parse(yield)
-      if parsed_response.is_a?(Hash) && parsed_response['error']
-        case parsed_response['error']
-        when "expired_token"
-          raise(ExpiredTokenError, "#{parsed_response['error']} - #{parsed_response['error_description']}")
+      max_retries = 2
+      retries = 0
+
+      begin
+        parsed_response = JSON.parse(yield)
+        handle_errors(parsed_response)
+
+        case parsed_response
+        when Array
+          handle_array_response(parsed_response, resource)
+        when Hash
+          handle_hash_response(parsed_response, resource)
+        else
+          parsed_response
+        end
+      rescue RuntimeError => e
+        if should_retry?(e, retries, max_retries)
+          retries += 1
+          retry
+        else
+          raise e
+        end
+      end
+    end
+
+    private
+
+    def handle_errors(response)
+      return unless response.is_a?(Hash)
+
+      return unless response['error']
+  
+      if response['error']  
+        if response['error'] == "expired_token"
+          refresh_access_token
+          raise 'Token refreshed. Retrying request.'
         else
           raise(ApiResponseError, "#{parsed_response['error']} - #{parsed_response['error_description']}")
         end
       end
-      return parsed_response.map{ |item| resource.new(item) } if parsed_response.is_a?(Array) && resource
-      return resource.new(parsed_response) if resource
+    end
 
-      parsed_response
+    def handle_array_response(response, resource)
+      response.map{ |item| resource.new(item) } if resource
+    end
 
-    # food for thoughs
-    # rescue ::RiseUp::ExpiredTokenError => e
-    #   account.global_config.update(rise_up_access_token_details: nil)
-    #   token_details = authenticate
-    #   account.global_config.update(
-    #     rise_up_access_token_details: token_details
-    #   )
-    #   self.access_token_details = account.global_config.rise_up_access_token_details
-    #   self.access_token = account.global_config.rise_up_access_token_details['access_token']
-    #   @retries = @retries ? @retries + 1 : 1
-    #   @retries > RETRY_LIMIT ? raise(e) : retry
+    def handle_hash_response(response, resource)
+      resource.new(response) if resource
+    end
+
+    def should_retry?(exception, retries, max_retries)
+      exception.message == 'Token refreshed. Retrying request.' && retries < max_retries
     end
   end
 end
