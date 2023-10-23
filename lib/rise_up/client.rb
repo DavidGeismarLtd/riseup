@@ -100,7 +100,7 @@ module RiseUp
           refresh_access_token
           raise 'Token refreshed. Retrying request.'
         else
-          raise(ApiResponseError, "#{parsed_response['error']} - #{parsed_response['error_description']}")
+          raise(ApiResponseError, "#{response['error']} - #{response['error_description']}")
         end
       end
     end
