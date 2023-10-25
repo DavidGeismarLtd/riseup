@@ -4,10 +4,10 @@ module RiseUp
   class Client
     module Users
       BASE = '/users'
-      def create_user(username, options = {})
+      def create_user(options = {})
         request(ApiResource::User) do
           self.class.post(BASE, {
-                            body: options.merge(username:).to_json,
+                            body: options.to_json,
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/json'
