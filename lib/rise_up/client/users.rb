@@ -18,7 +18,7 @@ module RiseUp
 
 
       def retrieve_users(options = {})
-        request(ApiResource::Training) do
+        request(ApiResource::User) do
          self.class.get(BASE, {
 
                                      query: options,
