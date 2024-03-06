@@ -89,20 +89,23 @@ module RiseUp
     end
 
     private
-
     def handle_errors(response)
       return unless response.is_a?(Hash)
 
       return unless response['error']
   
       if response['error']  
-        if response['error'] == "expired_token"
+        if response['error'] == "expired_token" || absent_token?(response['error']  )
           refresh_access_token
           raise 'Token refreshed. Retrying request.'
         else
           raise(ApiResponseError, "#{response['error']} - #{response['error_description']}")
         end
       end
+    end
+
+    def absent_token?(error)
+      error == 'invalid_request' && self.access_token.nil?
     end
 
     def handle_array_response(response, resource)
