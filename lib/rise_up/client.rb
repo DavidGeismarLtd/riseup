@@ -89,6 +89,7 @@ module RiseUp
     end
 
     private
+    
     def handle_errors(response)
       return unless response.is_a?(Hash)
 
