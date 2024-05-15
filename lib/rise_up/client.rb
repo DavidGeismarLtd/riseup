@@ -105,8 +105,20 @@ module RiseUp
       end
     end
 
+    def error_requiring_refresh_token?(response)
+      expired_token_error?(response['error']) || absent_token?(response['error']) || missing_expired_error?(response['error_description'])
+    end
+
+    def expired_token_error?(error)
+      error == "expired_token"
+    end
+
     def absent_token?(error)
       error == 'invalid_request' && self.access_token.nil?
+    end
+
+    def missing_expired_error?(error_description)
+      error_description == 'Malformed token (missing "expires")'
     end
 
     def handle_array_response(response, resource)
