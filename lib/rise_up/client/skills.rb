@@ -7,7 +7,7 @@ module RiseUp
 
       def retrieve_skills(options = {})
         request(ApiResource::Skill) do
-         self.class.get(BASE, {
+         self.class.get("#{@base_uri}/#{BASE}", {
                                      query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",

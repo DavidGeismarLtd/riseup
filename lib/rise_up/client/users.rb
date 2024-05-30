@@ -6,7 +6,7 @@ module RiseUp
       BASE = '/users'
       def create_user(options = {})
         request(ApiResource::User) do
-          self.class.post(BASE, {
+          self.class.post("#{@base_uri}/#{BASE}", {
                             body: options.to_json,
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
@@ -19,7 +19,7 @@ module RiseUp
 
       def retrieve_users(options = {})
         request(ApiResource::User) do
-         self.class.get(BASE, {
+         self.class.get("#{@base_uri}/#{BASE}", {
 
                                      query: options,
                                      headers: {
@@ -32,7 +32,7 @@ module RiseUp
 
       def get_user(id)
        request(ApiResource::User) do
-         self.class.get("#{BASE}/#{id}", {
+         self.class.get("#{@base_uri}/#{BASE}/#{id}", {
                           headers: {
                             'Authorization' => "Bearer #{access_token}",
                             'Content-Type' => 'application/json'

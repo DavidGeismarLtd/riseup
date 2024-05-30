@@ -7,7 +7,7 @@ module RiseUp
 
       def get_session_group(session_group_id)
          request(ApiResource::SessionGroup) do
-           self.class.get("#{BASE}/#{session_group_id}", {
+           self.class.get("#{@base_uri}/#{BASE}/#{session_group_id}", {
                                        headers: {
                                          'Authorization' => "Bearer #{access_token}",
                                          'Content-Type' => 'application/json'
@@ -18,7 +18,7 @@ module RiseUp
 
       def retrieve_session_groups(options = {})
         request(ApiResource::SessionGroup) do
-         self.class.get(BASE, {
+         self.class.get("#{@base_uri}/#{BASE}", {
                                      query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",

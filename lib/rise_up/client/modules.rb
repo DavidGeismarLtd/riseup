@@ -7,7 +7,7 @@ module RiseUp
 
       def create_module(options={})
         request(ApiResource::Module) do
-          self.class.post(BASE, {
+          self.class.post("#{@base_uri}/#{BASE}", {
             query: options,
             headers: {
               'Authorization' => "Bearer #{access_token}",
@@ -19,7 +19,7 @@ module RiseUp
 
       def retrieve_modules(options = {})
         request(ApiResource::Module) do
-         self.class.get(BASE, {
+         self.class.get("#{@base_uri}/#{BASE}", {
                                      query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",

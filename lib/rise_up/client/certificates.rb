@@ -6,7 +6,7 @@ module RiseUp
       BASE = '/certificates'
 
       def delete
-         response = self.class.post(BASE, {
+         response = self.class.post("#{@base_uri}/#{BASE}", {
                                       body: { grant_type: "client_credentials" }.to_json,
                                       headers: {
                                         'Authorization' => "Bearer #{access_token}",

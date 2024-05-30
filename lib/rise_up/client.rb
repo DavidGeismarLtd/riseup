@@ -47,12 +47,17 @@ module RiseUp
     include RiseUp::Client::Skills
     include RiseUp::Client::TrainingCategories
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token, :token_storage
-    base_uri 'https://api.riseup.ai/v3'
+
+    BASE_URI_PRODUCTION = 'https://api.riseup.ai/v3'
+    BASE_URI_PREPROD = 'https://preprod-customer-api.riseup.ai'
 
      def initialize(options = {})
       options.each do |key, value|
         instance_variable_set("@#{key}", value)
       end
+
+      @base_uri = options[:mode] == 'preprod' ? BASE_URI_PREPROD : BASE_URI_PRODUCTION
+      
       yield(self) if block_given?
     end
 

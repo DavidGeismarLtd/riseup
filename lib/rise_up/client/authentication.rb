@@ -6,7 +6,7 @@ module RiseUp
       BASE = '/oauth/token'
 
       def authenticate
-        response = self.class.post(BASE, {
+        response = self.class.post("#{@base_uri}/#{BASE}", {
                                     body: { grant_type: "client_credentials" }.to_query,
                                     headers: {
                                       'Authorization' => "Basic #{authorization_base_64}",
@@ -32,6 +32,6 @@ module RiseUp
 end
 # curl -X POST \
 #   --header "Content-Type: application/x-www-form-urlencoded" \
-#   --header "Authorization: Basic NWRhMTI0ZDAzMTVkNjM4MjQwZjBjNmE3YThjN2U1OTY6MzQ3MjI3NzhmNDQ5NzNlMTc4OTVkNDY1YzNhZjdmNDI=" \
-#   -d "grant_type=client_credentials" \
-#   https://yunoo.riseup.ai/oauth/token
+#   --header "Authorization: Basic ZDliZTNkZDlkOGQzMGFkZTgxZjRmM2NjMTI1NDY1ZjU6YjM2MTliYWVmNWMyZjFiOWQ5ZjhkMmQ4NjBiNWYxNjc=" \
+#   -d "grant_type=client_credentials" \ 
+#   https://preprod-customer-api.riseup.ai/oauth/token

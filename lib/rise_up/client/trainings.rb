@@ -7,7 +7,7 @@ module RiseUp
 
       def retrieve_trainings(options = {})
         request(ApiResource::Training) do
-         self.class.get(BASE, {
+         self.class.get("#{@base_uri}/#{BASE}", {
 
                                      query: options,
                                      headers: {
@@ -20,7 +20,7 @@ module RiseUp
 
       def create_training(options = {})
         request(ApiResource::Training) do
-          self.class.post(BASE, {
+          self.class.post("#{@base_uri}/#{BASE}", {
                             body: options.to_json,
                             headers: {
                               'Content-Type' => 'application/x-www-form-urlencoded',
