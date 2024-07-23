@@ -24,29 +24,30 @@ module RiseUp
                             'Content-Type' => 'application/json'
                           }
                         }).body
-    end
-
-    def retrieve_training_path_subscription(training_path_subscription_id, options={})
-      request(ApiResource::TrainingPathSubscription) do
-       self.class.get("#{@base_uri}/#{BASE}/#{training_path_subscription_id}", {
-                                   query: options,
-                                   headers: {
-                                     'Authorization' => "Bearer #{access_token}",
-                                     'Content-Type' => 'application/json'
-                                   }
-                                 }).body
       end
-    end
 
-    def retrieve_training_path_subscriptions(options = {})
-      request(ApiResource::TrainingPathSubscription) do
-        self.class.get("#{@base_uri}/#{BASE}", {
+      def retrieve_training_path_subscription(training_path_subscription_id, options={})
+        request(ApiResource::TrainingPathSubscription) do
+        self.class.get("#{@base_uri}/#{BASE}/#{training_path_subscription_id}", {
                                     query: options,
                                     headers: {
                                       'Authorization' => "Bearer #{access_token}",
                                       'Content-Type' => 'application/json'
                                     }
                                   }).body
+        end
+      end
+
+      def retrieve_training_path_subscriptions(options = {})
+        request(ApiResource::TrainingPathSubscription) do
+          self.class.get("#{@base_uri}/#{BASE}", {
+                                      query: options,
+                                      headers: {
+                                        'Authorization' => "Bearer #{access_token}",
+                                        'Content-Type' => 'application/json'
+                                      }
+                                    }).body
+        end
       end
     end
   end
