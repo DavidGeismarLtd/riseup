@@ -4,7 +4,8 @@ module RiseUp
   class Client
     module TrainingPathSubscriptions
       BASE = '/trainingpathsubscriptions'
-      def create_training_path_subscription(user_id, training_path_id)
+      
+      def create_training_path_subscription(user_id, training_path_id, options = {})
         request(ApiResource::TrainingPathSubscription) do
           self.class.post("#{@base_uri}/#{BASE}", {
                             body: options.merge(iduser: user_id, idpath: training_path_id).to_json,
