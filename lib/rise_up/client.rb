@@ -52,6 +52,7 @@ module RiseUp
     include RiseUp::Client::Modules
     include RiseUp::Client::Skills
     include RiseUp::Client::TrainingCategories
+    include RiseUp::Client::CustomHeaders
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token, :token_storage, :mode
 
     BASE_URI_PRODUCTION = 'https://api.riseup.ai/v3'
