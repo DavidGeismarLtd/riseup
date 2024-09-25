@@ -3,7 +3,7 @@
 module RiseUp
   class Client
     module CustomHeaders
-      BASE = '/custom-header'
+      BASE = '/customheader'
 
       def create_custom_header(options = {})
         request(ApiResource::CustomHeader) do
