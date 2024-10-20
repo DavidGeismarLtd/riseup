@@ -49,7 +49,13 @@ module RiseUp
       # DELETE: Delete a custom header
       def delete_custom_header(id)
         url = "#{@base_uri}/#{BASE}/#{id}"
-        self.class.delete(url, headers: default_headers).body
+        self.class.delete(
+          url, 
+          headers: {
+            'Authorization' => "Bearer #{access_token}",
+            'Content-Type' => 'application/json'
+          }
+        ).body
       end
     end
   end
