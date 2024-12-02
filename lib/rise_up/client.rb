@@ -73,6 +73,37 @@ module RiseUp
       self
     end
 
+    # Common method for paginated requests
+    def retrieve_with_pagination(resource_name, options = {}, resource_klass = nil)
+      url = "#{@base_uri}/#{resource_name}"
+      items = []
+
+      loop do
+        response = self.class.get(url, {
+          query: options,
+          headers: {
+            'Authorization' => "Bearer #{access_token}",
+            'Content-Type' => 'application/json'
+          }
+        })
+
+        handle_errors(response) # Ensure robust error handling
+
+        parsed_response = JSON.parse(response.body)
+        items.concat(parsed_response.map { |item| resource_klass ? resource_klass.new(item) : item })
+
+        # Process `Link` header for next page
+        link_header = response.headers['Link']
+        next_link = extract_next_link(link_header)
+
+        break unless next_link
+
+        url = next_link # Update URL for the next page
+      end
+
+      items
+    end
+
 # "1ef7a484f8e4e76ed9c0c7bc6af1b08ef5cb045f"
     def request(resource = nil)
       max_retries = 2
@@ -101,6 +132,15 @@ module RiseUp
     end
 
     private
+
+    def extract_next_link(link_header)
+      return nil unless link_header
+
+      # Extract the URL marked with `rel="next"`
+      links = link_header.split(',').map(&:strip)
+      next_link = links.find { |link| link.include?('rel="next"') }
+      next_link&.match(/<(.+?)>/)&.captures&.first
+    end
     
     def handle_errors(response)
       return unless response.is_a?(Hash)

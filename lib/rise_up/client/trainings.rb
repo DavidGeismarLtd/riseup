@@ -5,6 +5,17 @@ module RiseUp
     module Trainings
       BASE = '/trainings'
 
+      def get_training(training_id)
+        request(ApiResource::Training) do
+          self.class.get("#{@base_uri}/#{BASE}/#{training_id}", {
+                                      headers: {
+                                        'Authorization' => "Bearer #{access_token}",
+                                        'Content-Type' => 'application/json'
+                                      }
+                                    }).body
+        end
+      end
+      
       def retrieve_trainings(options = {})
         request(ApiResource::Training) do
          self.class.get("#{@base_uri}/#{BASE}", {
@@ -16,6 +27,11 @@ module RiseUp
                                      }
                                    }).body
          end
+      end
+
+
+      def retrieve_all_pages_trainings(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::Training)
       end
 
       def create_training(options = {})

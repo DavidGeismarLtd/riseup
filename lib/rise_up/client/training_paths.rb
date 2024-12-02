@@ -5,6 +5,18 @@ module RiseUp
     module TrainingPaths
       BASE = '/trainingpaths'
 
+
+      def get_training_path(training_path_id)
+        request(ApiResource::training_path) do
+          self.class.get("#{@base_uri}/#{BASE}/#{training_path_id}", {
+                                      headers: {
+                                        'Authorization' => "Bearer #{access_token}",
+                                        'Content-Type' => 'application/json'
+                                      }
+                                    }).body
+        end
+      end
+
       def retrieve_training_paths(options = {})
         request(ApiResource::TrainingPath) do
          self.class.get("#{@base_uri}/#{BASE}", {
@@ -15,6 +27,10 @@ module RiseUp
                                      }
                                    }).body
          end
+      end
+
+      def retrieve_all_pages_training_paths(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::TrainingPath)
       end
 
       def create_training_paths(options = {})

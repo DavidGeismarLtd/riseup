@@ -17,6 +17,10 @@ module RiseUp
          end
       end
 
+      def retrieve_all_pages_learning_paths(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::LearningPath)
+      end
+
       def create_learning_paths(options = {})
         request(ApiResource::LearningPath) do
           self.class.post("#{@base_uri}/#{BASE}", {

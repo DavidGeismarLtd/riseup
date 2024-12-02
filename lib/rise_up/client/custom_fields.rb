@@ -16,6 +16,10 @@ module RiseUp
                                    }).body
          end
       end
+
+      def retrieve_all_pages_custom_fields(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::CustomField)
+      end
     end
   end
 end

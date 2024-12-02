@@ -16,6 +16,10 @@ module RiseUp
          end
       end
 
+      def retrieve_all_pages_sessions(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::Session)
+      end
+
       def retrieve_sessions(options = {})
         request(ApiResource::Session) do
          self.class.get("#{@base_uri}/#{BASE}", {

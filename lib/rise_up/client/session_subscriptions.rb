@@ -14,8 +14,12 @@ module RiseUp
          end
       end
 
-      def retrieve_sessions(options = {})
-        request(ApiResource::Session) do
+      def retrieve_all_pages_session_subcriptions(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::SessionSubscription)
+      end
+
+      def retrieve_session_subcriptions(options = {})
+        request(ApiResource::SessionSubscription) do
          self.class.get("#{@base_uri}/#{BASE}", {
                                     query: options,
                                      headers: {

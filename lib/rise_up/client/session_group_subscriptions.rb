@@ -1,7 +1,7 @@
 module RiseUp
   class Client
     module SessionGroupSubscriptions
-      BASE = '/sessiongroupsubscriptions'
+      BASE = '/trainingsessionregistrations'
 
       def create_session_group_subscription(user_id, session_group_id, options = {})
         request(ApiResource::SessionGroupSubscription) do
@@ -22,6 +22,10 @@ module RiseUp
                             'Content-Type' => 'application/json'
                           }
                         }).body
+      end
+
+      def retrieve_all_pages_session_group_subscriptions(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::SessionGroupSubscription)
       end
 
       def retrieve_session_group_subscriptions(options = {})

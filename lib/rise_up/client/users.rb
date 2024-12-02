@@ -17,6 +17,11 @@ module RiseUp
       end
 
 
+
+      def retrieve_all_pages_users(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::User)
+      end
+
       def retrieve_users(options = {})
         request(ApiResource::User) do
          self.class.get("#{@base_uri}/#{BASE}", {

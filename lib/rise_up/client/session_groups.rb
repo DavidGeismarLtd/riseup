@@ -3,7 +3,7 @@
 module RiseUp
   class Client
     module SessionGroups
-      BASE = '/sessiongroups'
+      BASE = '/trainingsessions'
 
       def get_session_group(session_group_id)
          request(ApiResource::SessionGroup) do
@@ -14,6 +14,10 @@ module RiseUp
                                        }
                                      }).body
          end
+      end
+
+      def retrieve_all_pages_session_groups(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::SessionGroup)
       end
 
       def retrieve_session_groups(options = {})

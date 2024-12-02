@@ -41,6 +41,10 @@ module RiseUp
         end
       end
 
+      def retrieve_all_pages_groups(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::Group)
+      end
+
       def retrieve_groups(options = {})
         request(ApiResource::Group) do
          self.class.get("#{@base_uri}/#{BASE}", {

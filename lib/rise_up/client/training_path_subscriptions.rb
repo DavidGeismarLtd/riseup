@@ -39,6 +39,10 @@ module RiseUp
         end
       end
 
+      def retrieve_all_pages_training_path_subscriptions(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::TrainingPathSubscription)
+      end
+
       def retrieve_training_path_subscriptions(options = {})
         request(ApiResource::TrainingPathSubscription) do
           self.class.get("#{@base_uri}/#{BASE}", {

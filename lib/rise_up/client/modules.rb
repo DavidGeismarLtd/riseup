@@ -17,6 +17,11 @@ module RiseUp
         end
       end
 
+
+      def retrieve_all_pages_modules(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::Module)
+      end
+
       def retrieve_modules(options = {})
         request(ApiResource::Module) do
          self.class.get("#{@base_uri}/#{BASE}", {
