@@ -5,6 +5,17 @@ module RiseUp
     module CustomFields
       BASE = '/customfields'
 
+      def get_custom_field(custom_field_id)
+        request(ApiResource::CustomField) do
+          self.class.get("#{@base_uri}/#{BASE}/#{custom_field_id}", {
+                                      headers: {
+                                        'Authorization' => "Bearer #{access_token}",
+                                        'Content-Type' => 'application/json'
+                                      }
+                                    }).body
+        end
+     end
+
       def retrieve_custom_fields(options = {})
         request(ApiResource::CustomField) do
          self.class.get("#{@base_uri}/#{BASE}", {

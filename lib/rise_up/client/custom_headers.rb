@@ -17,11 +17,21 @@ module RiseUp
         end
       end
 
-      def retrieve_custom_headers(options = {})
-        url = options[:id] ? "#{@base_uri}/#{BASE}/#{options[:id]}" : "#{@base_uri}/#{BASE}"
-
+      def get_custom_header(custom_header_id)
         request(ApiResource::CustomHeader) do
-         self.class.get(url, {
+          self.class.get("#{@base_uri}/#{BASE}/#{custom_header_id}", {
+                                      headers: {
+                                        'Authorization' => "Bearer #{access_token}",
+                                        'Content-Type' => 'application/json'
+                                      }
+                                    }).body
+        end
+     end
+
+
+      def retrieve_custom_headers(options = {})
+        request(ApiResource::CustomHeader) do
+         self.class.get("#{@base_uri}/#{BASE}", {
 
                                      query: options,
                                      headers: {
@@ -32,6 +42,9 @@ module RiseUp
          end
       end
 
+      def retrieve_all_pages_custom_headers(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::CustomHeaders)
+      end
       # PUT: Update an existing custom header
       def update_custom_header(id, options = {})
         url = "#{@base_uri}/#{BASE}/#{id}"

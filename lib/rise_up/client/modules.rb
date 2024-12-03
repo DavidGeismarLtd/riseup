@@ -17,6 +17,16 @@ module RiseUp
         end
       end
 
+      def get_module(module_id)
+        request(ApiResource::Module) do
+          self.class.get("#{@base_uri}/#{BASE}/#{module_id}", {
+                                      headers: {
+                                        'Authorization' => "Bearer #{access_token}",
+                                        'Content-Type' => 'application/json'
+                                      }
+                                    }).body
+        end
+     end
 
       def retrieve_all_pages_modules(options={})
         retrieve_with_pagination(BASE, options, ApiResource::Module)
