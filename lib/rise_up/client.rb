@@ -79,7 +79,7 @@ module RiseUp
       items = []
     
       loop do
-        response = request(resource_klass) do
+        response = request(resource_klass, wrap_response: true) do
           self.class.get(url, {
             query: options,
             headers: {
@@ -103,7 +103,7 @@ module RiseUp
       items
     end
     # "1ef7a484f8e4e76ed9c0c7bc6af1b08ef5cb045f"
-    def request(resource = nil)
+    def request(resource = nil, wrap_response: false)
       max_retries = 2
       retries = 0
 
@@ -112,7 +112,11 @@ module RiseUp
         parsed_body = JSON.parse(raw_response.body)
         handle_errors(parsed_body)
 
-        OpenStruct.new(body: handle_response(parsed_body, resource), headers: raw_response.headers)
+        if wrap_response
+          OpenStruct.new(body: handle_response(parsed_body, resource), headers: raw_response.headers)
+        else
+          handle_response(parsed_body, resource) # Return the processed response directly
+        end
       rescue RuntimeError => e
         if should_retry?(e, retries, max_retries)
           retries += 1
