@@ -13,7 +13,7 @@ module RiseUp
               'Authorization' => "Bearer #{access_token}",
               'Content-Type' => 'application/json'
             }
-          }).body
+          })
         end
       end
 
@@ -24,7 +24,7 @@ module RiseUp
                                         'Authorization' => "Bearer #{access_token}",
                                         'Content-Type' => 'application/json'
                                       }
-                                    }).body
+                                    })
         end
      end
 
@@ -40,7 +40,7 @@ module RiseUp
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
                                      }
-                                   }).body
+                                   })
          end
       end
     end

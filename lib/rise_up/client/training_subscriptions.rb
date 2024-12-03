@@ -12,7 +12,7 @@ module RiseUp
                               'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/json'
                             }
-                          }).body
+                          })
         end
       end
 
@@ -22,7 +22,7 @@ module RiseUp
                               'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/json'
                             }
-                          }).body
+                          })
       end
 
       def retrieve_training_subscription(training_subscription_id, options={})
@@ -33,7 +33,7 @@ module RiseUp
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
                                      }
-                                   }).body
+                                   })
          end
       end
 
@@ -49,7 +49,7 @@ module RiseUp
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
                                      }
-                                   }).body
+                                   })
          end
       end
     end

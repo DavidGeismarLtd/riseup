@@ -13,7 +13,7 @@ module RiseUp
                               'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/json'
                             }
-                          }).body
+                          })
         end
       end
 
@@ -24,7 +24,7 @@ module RiseUp
                             'Authorization' => "Bearer #{access_token}",
                             'Content-Type' => 'application/json'
                           }
-                        }).body
+                        })
       end
 
       def retrieve_learning_path_registration(learning_path_registration_id, options={})
@@ -35,7 +35,7 @@ module RiseUp
                                       'Authorization' => "Bearer #{access_token}",
                                       'Content-Type' => 'application/json'
                                     }
-                                  }).body
+                                  })
         end
       end
 
@@ -51,7 +51,7 @@ module RiseUp
                                         'Authorization' => "Bearer #{access_token}",
                                         'Content-Type' => 'application/json'
                                       }
-                                    }).body
+                                    })
         end
       end
     end

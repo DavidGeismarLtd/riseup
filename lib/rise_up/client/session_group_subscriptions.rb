@@ -11,7 +11,7 @@ module RiseUp
                               'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/json'
                             }
-                          }).body
+                          })
         end
       end
 
@@ -21,7 +21,7 @@ module RiseUp
                             'Authorization' => "Bearer #{access_token}",
                             'Content-Type' => 'application/json'
                           }
-                        }).body
+                        })
       end
 
       def get_module(session_group_subscription_id)
@@ -31,7 +31,7 @@ module RiseUp
                                         'Authorization' => "Bearer #{access_token}",
                                         'Content-Type' => 'application/json'
                                       }
-                                    }).body
+                                    })
         end
      end
 
@@ -47,7 +47,7 @@ module RiseUp
                                        'Authorization' => "Bearer #{access_token}",
                                        'Content-Type' => 'application/json'
                                      }
-                                   }).body
+                                   })
          end
       end
     end

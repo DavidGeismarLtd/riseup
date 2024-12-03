@@ -86,7 +86,7 @@ module RiseUp
               'Authorization' => "Bearer #{access_token}",
               'Content-Type' => 'application/json'
             }
-          }).body
+          })
         end
     
         items.concat(response.body)
@@ -108,7 +108,8 @@ module RiseUp
       retries = 0
 
       begin
-        parsed_body = JSON.parse(yield)
+        raw_response = yield
+        parsed_body = JSON.parse(raw_response.body)
         handle_errors(parsed_body)
 
         OpenStruct.new(body: handle_response(parsed_body, resource), headers: raw_response.headers)
