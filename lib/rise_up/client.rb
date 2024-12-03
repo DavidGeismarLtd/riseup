@@ -77,50 +77,41 @@ module RiseUp
     def retrieve_with_pagination(resource_name, options = {}, resource_klass = nil)
       url = "#{@base_uri}/#{resource_name}"
       items = []
-
+    
       loop do
-        response = self.class.get(url, {
-          query: options,
-          headers: {
-            'Authorization' => "Bearer #{access_token}",
-            'Content-Type' => 'application/json'
-          }
-        })
-
-        handle_errors(response) # Ensure robust error handling
-
-        parsed_response = JSON.parse(response.body)
-        items.concat(parsed_response.map { |item| resource_klass ? resource_klass.new(item) : item })
-
+        response = request(resource_klass) do
+          self.class.get(url, {
+            query: options,
+            headers: {
+              'Authorization' => "Bearer #{access_token}",
+              'Content-Type' => 'application/json'
+            }
+          }).body
+        end
+    
+        items.concat(response.body)
+    
         # Process `Link` header for next page
         link_header = response.headers['Link']
         next_link = extract_next_link(link_header)
-
+    
         break unless next_link
-
+    
         url = next_link # Update URL for the next page
       end
-
+    
       items
     end
-
-# "1ef7a484f8e4e76ed9c0c7bc6af1b08ef5cb045f"
+    # "1ef7a484f8e4e76ed9c0c7bc6af1b08ef5cb045f"
     def request(resource = nil)
       max_retries = 2
       retries = 0
 
       begin
-        parsed_response = JSON.parse(yield)
-        handle_errors(parsed_response)
+        parsed_body = JSON.parse(yield)
+        handle_errors(parsed_body)
 
-        case parsed_response
-        when Array
-          handle_array_response(parsed_response, resource)
-        when Hash
-          handle_hash_response(parsed_response, resource)
-        else
-          parsed_response
-        end
+        OpenStruct.new(body: handle_response(parsed_body, resource), headers: raw_response.headers)
       rescue RuntimeError => e
         if should_retry?(e, retries, max_retries)
           retries += 1
@@ -132,6 +123,17 @@ module RiseUp
     end
 
     private
+
+    def handle_response(parsed_body, resource)
+      case parsed_body
+      when Array
+        handle_array_response(parsed_body, resource)
+      when Hash
+        handle_hash_response(parsed_body, resource)
+      else
+        parsed_body
+      end
+    end
 
     def extract_next_link(link_header)
       return nil unless link_header
