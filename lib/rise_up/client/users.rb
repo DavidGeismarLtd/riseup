@@ -35,6 +35,18 @@ module RiseUp
          end
       end
 
+      def update_user(id, options = {})
+        request(ApiResource::User) do
+          self.class.put("#{@base_uri}/#{BASE}/#{id}", {
+                           body: options.to_json,
+                           headers: {
+                            'Authorization' => "Bearer #{access_token}",
+                            'Content-Type' => 'application/json'
+                          }
+                        })
+        end                     
+      end
+
       def get_user(id)
        request(ApiResource::User) do
          self.class.get("#{@base_uri}/#{BASE}/#{id}", {
