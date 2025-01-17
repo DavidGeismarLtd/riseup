@@ -155,13 +155,25 @@ module RiseUp
       return unless response['error']
   
       if response['error']  
-        if response['error'] == "expired_token" || absent_token?(response['error']  )
+        if retryable_error?(response['error'])
           refresh_access_token
           raise 'Token refreshed. Retrying request.'
         else
           raise(ApiResponseError, "#{response['error']} - #{response['error_description']}")
         end
       end
+    end
+
+    def retryable_error?(error)
+      expired_token?(error) || absent_token?(error) || invalid_token?(error)
+    end
+
+    def expired_token?(error)
+      error.include?("expired_token")
+    end
+
+    def invalid_token?(error)
+      error.include?("invalid_token")
     end
 
     def error_requiring_refresh_token?(response)
