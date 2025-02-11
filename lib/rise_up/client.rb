@@ -55,16 +55,26 @@ module RiseUp
     include RiseUp::Client::CustomHeaders
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token, :token_storage, :mode
 
-    BASE_URI_PRODUCTION = 'https://api.riseup.ai/v3'
-    BASE_URI_PREPROD = 'https://preprod-customer-api.riseup.ai/v3'
+    BASE_URIS = {
+      production: {
+        aws: 'https://api.riseup.ai/v3',
+        azure: 'https://api.riseup.fr/v3'
+      },
+      preprod: {
+        aws: 'https://preprod-customer-api.riseup.ai/v3',
+        azure: 'https://preprod-customer-api.riseup.fr/v3'
+      }
+    }.freeze
 
      def initialize(options = {})
-      options.each do |key, value|
-        instance_variable_set("@#{key}", value)
-      end
+        options.each do |key, value|
+          instance_variable_set("@#{key}", value)
+        end
 
-      @base_uri = options[:mode] == 'preprod' ? BASE_URI_PREPROD : BASE_URI_PRODUCTION
-      
+      mode = options.fetch(:mode, 'production').to_sym
+      cloud = options.fetch(:cloud, 'aws').to_sym
+      @base_uri = BASE_URIS.dig(mode, cloud) || BASE_URIS[:production][:aws]
+
       yield(self) if block_given?
     end
 
