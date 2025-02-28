@@ -16,6 +16,8 @@ require 'rise_up/api_resource/training_category'
 require 'rise_up/api_resource/session_group'
 require 'rise_up/api_resource/learning_path_registration'
 require 'rise_up/api_resource/custom_header'
+require 'rise_up/api_resource/partner'
+require 'rise_up/client/partners'
 require 'rise_up/client/users'
 require 'rise_up/client/sessions'
 require 'rise_up/client/skills'
@@ -33,6 +35,7 @@ require 'rise_up/client/groups'
 require 'rise_up/client/custom_fields'
 require 'rise_up/client/training_categories'
 require 'rise_up/client/custom_headers'
+
 module RiseUp
   class ExpiredTokenError < StandardError; end
   class ApiResponseError < StandardError; end
