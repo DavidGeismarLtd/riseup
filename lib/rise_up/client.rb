@@ -38,6 +38,7 @@ module RiseUp
   class ApiResponseError < StandardError; end
   class Client
     include HTTParty
+    include RiseUp::Client::Partners
     include RiseUp::Client::Users
     include RiseUp::Client::Authentication
     include RiseUp::Client::TrainingSubscriptions
