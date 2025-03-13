@@ -43,7 +43,7 @@ module RiseUp
       end
 
       def retrieve_all_pages_custom_headers(options={})
-        retrieve_with_pagination(BASE, options, ApiResource::CustomHeaders)
+        retrieve_with_pagination(BASE, options, ApiResource::CustomHeader)
       end
       # PUT: Update an existing custom header
       def update_custom_header(id, options = {})
