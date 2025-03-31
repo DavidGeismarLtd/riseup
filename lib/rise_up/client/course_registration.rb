@@ -2,12 +2,14 @@
 
 module RiseUp
   class Client
-    module TrainingSubscriptions
-      BASE = '/trainingsubscriptions'
-      def create_training_subscription(user_id, training_id, options = {})
-        request(ApiResource::TrainingSubscription) do
+    # use to be traininsubscriptions
+    # now is courseregistrations
+    module CourseRegistrations
+      BASE = '/courseregistrations'
+      def create_course_registration(user_id, course_id, options = {})
+        request(ApiResource::TrainingRegistration) do
           self.class.post("#{@base_uri}/#{BASE}", {
-                            body: options.merge(iduser: user_id, idtraining: training_id).to_json,
+                            body: options.merge(iduser: user_id, idtraining: course_id).to_json,
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/json'
@@ -16,8 +18,8 @@ module RiseUp
         end
       end
 
-      def delete_training_subscription(training_subscription_id)
-          self.class.delete("#{@base_uri}/#{BASE}/#{training_subscription_id}", {
+      def delete_course_registration(course_registration_id)
+          self.class.delete("#{@base_uri}/#{BASE}/#{course_registration_id}", {
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
                               'Content-Type' => 'application/json'
@@ -25,9 +27,9 @@ module RiseUp
                           })
       end
 
-      def retrieve_training_subscription(training_subscription_id, options={})
-        request(ApiResource::TrainingSubscription) do
-         self.class.get("#{@base_uri}/#{BASE}/#{training_subscription_id}", {
+      def retrieve_course_registration(course_registration_id, options={})
+        request(ApiResource::TrainingRegistration) do
+         self.class.get("#{@base_uri}/#{BASE}/#{course_registration_id}", {
                                      query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
@@ -37,12 +39,12 @@ module RiseUp
          end
       end
 
-      def retrieve_all_pages_training_subscriptions(options={})
-        retrieve_with_pagination(BASE, options, ApiResource::TrainingSubscription)
+      def retrieve_all_pages_course_registrations(options={})
+        retrieve_with_pagination(BASE, options, ApiResource::TrainingRegistration)
       end
 
-      def retrieve_training_subscriptions(options = {})
-        request(ApiResource::TrainingSubscription) do
+      def retrieve_course_registrations(options = {})
+        request(ApiResource::TrainingRegistration) do
          self.class.get("#{@base_uri}/#{BASE}", {
                                      query: options,
                                      headers: {

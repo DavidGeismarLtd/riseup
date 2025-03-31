@@ -1,6 +1,6 @@
 module RiseUp
   module ApiResource
-    class TrainingSubscription < Resource
+    class CourseRegistration < Resource
     end
   end
 end
