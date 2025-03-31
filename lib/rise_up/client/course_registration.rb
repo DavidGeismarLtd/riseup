@@ -7,7 +7,7 @@ module RiseUp
     module CourseRegistrations
       BASE = '/courseregistrations'
       def create_course_registration(user_id, course_id, options = {})
-        request(ApiResource::TrainingRegistration) do
+        request(ApiResource::CourseRegistration) do
           self.class.post("#{@base_uri}/#{BASE}", {
                             body: options.merge(iduser: user_id, idtraining: course_id).to_json,
                             headers: {
@@ -28,7 +28,7 @@ module RiseUp
       end
 
       def retrieve_course_registration(course_registration_id, options={})
-        request(ApiResource::TrainingRegistration) do
+        request(ApiResource::CourseRegistration) do
          self.class.get("#{@base_uri}/#{BASE}/#{course_registration_id}", {
                                      query: options,
                                      headers: {
@@ -40,11 +40,11 @@ module RiseUp
       end
 
       def retrieve_all_pages_course_registrations(options={})
-        retrieve_with_pagination(BASE, options, ApiResource::TrainingRegistration)
+        retrieve_with_pagination(BASE, options, ApiResource::CourseRegistration)
       end
 
       def retrieve_course_registrations(options = {})
-        request(ApiResource::TrainingRegistration) do
+        request(ApiResource::CourseRegistration) do
          self.class.get("#{@base_uri}/#{BASE}", {
                                      query: options,
                                      headers: {
