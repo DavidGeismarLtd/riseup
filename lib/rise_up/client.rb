@@ -44,7 +44,7 @@ module RiseUp
     include RiseUp::Client::Partners
     include RiseUp::Client::Users
     include RiseUp::Client::Authentication
-    include RiseUp::Client::TrainingSubscriptions
+    include RiseUp::Client::CourseRegistrations
     include RiseUp::Client::TrainingPathSubscriptions
     include RiseUp::Client::Trainings
     include RiseUp::Client::TrainingPaths
