@@ -5,7 +5,7 @@ module RiseUp
     # use to be traininsubscriptions
     # now is courseregistrations
     module CourseRegistrations
-      BASE = '/courseregistrations'
+      BASE = '/courseregistrations/monetisation'
       def create_course_registration(user_id, course_id, options = {})
         request(ApiResource::CourseRegistration) do
           self.class.post("#{@base_uri}/#{BASE}", {
