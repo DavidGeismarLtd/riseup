@@ -1,4 +1,5 @@
 require 'httparty'
+require 'ostruct'
 require 'rise_up/api_resource/resource'
 require 'rise_up/api_resource/user'
 require 'rise_up/api_resource/course_registration'
