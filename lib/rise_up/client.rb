@@ -103,8 +103,8 @@ module RiseUp
             }
           })
         end
-    
-        items.concat(response.body)
+        
+        items.concat(response.body) if response.body
     
         # Process `Link` header for next page
         link_header = response.headers['Link']
