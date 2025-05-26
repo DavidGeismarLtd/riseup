@@ -3,6 +3,7 @@ require 'ostruct'
 require 'rise_up/api_resource/resource'
 require 'rise_up/api_resource/user'
 require 'rise_up/api_resource/course_registration'
+require 'rise_up/api_resource/course'
 require 'rise_up/api_resource/training_path_subscription'
 require 'rise_up/api_resource/training'
 require 'rise_up/api_resource/training_path'
@@ -47,6 +48,7 @@ module RiseUp
     include RiseUp::Client::Users
     include RiseUp::Client::Authentication
     include RiseUp::Client::CourseRegistrations
+    include RiseUp::Client::Courses
     include RiseUp::Client::TrainingPathSubscriptions
     include RiseUp::Client::Trainings
     include RiseUp::Client::TrainingPaths
