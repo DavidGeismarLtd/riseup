@@ -1,6 +1,6 @@
 module RiseUp
   module ApiResource
-    class TrainingPath < Resource
+    class LearningPath < Resource
     end
   end
 end
