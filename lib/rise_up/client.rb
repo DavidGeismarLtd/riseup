@@ -2,6 +2,10 @@ require 'httparty'
 require 'ostruct'
 require 'rise_up/api_resource/resource'
 require 'rise_up/api_resource/certification'
+require 'rise_up/api_resource/objective'
+require 'rise_up/api_resource/objective_registration'
+require 'rise_up/api_resource/objective_level'
+require 'rise_up/api_resource/objective_level_user'
 require 'rise_up/api_resource/course_request'
 require 'rise_up/api_resource/document'
 require 'rise_up/api_resource/user'
@@ -44,6 +48,10 @@ require 'rise_up/client/custom_headers'
 require 'rise_up/client/documents'
 require 'rise_up/client/course_requests'
 require 'rise_up/client/certifications'
+require 'rise_up/client/objectives'
+require 'rise_up/client/objective_registrations'
+require 'rise_up/client/objective_level_users'
+require 'rise_up/client/objective_levels'
 
 module RiseUp
   class ExpiredTokenError < StandardError; end
@@ -71,6 +79,10 @@ module RiseUp
     include RiseUp::Client::CustomHeaders
     include RiseUp::Client::Documents
     include RiseUp::Client::LearningPaths
+    include RiseUp::Client::Objectives
+    include RiseUp::Client::ObjectiveRegistrations
+    include RiseUp::Client::ObjectiveLevelUsers
+    include RiseUp::Client::ObjectiveLevels
     attr_accessor :public_key, :private_key, :authorization_base_64, :access_token_details, :access_token, :token_storage, :mode
 
     BASE_URIS = {
