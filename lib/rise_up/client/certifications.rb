@@ -2,8 +2,8 @@
 
 module RiseUp
   class Client
-    module Certificates
-      BASE = '/certificates'
+    module Certifications
+      BASE = '/certifications'
 
       def delete
          response = self.class.post("#{@base_uri}/#{BASE}", {

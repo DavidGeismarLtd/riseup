@@ -1,6 +1,7 @@
 require 'httparty'
 require 'ostruct'
 require 'rise_up/api_resource/resource'
+require 'rise_up/api_resource/certification'
 require 'rise_up/api_resource/course_request'
 require 'rise_up/api_resource/document'
 require 'rise_up/api_resource/user'
@@ -42,6 +43,7 @@ require 'rise_up/client/training_categories'
 require 'rise_up/client/custom_headers'
 require 'rise_up/client/documents'
 require 'rise_up/client/course_requests'
+require 'rise_up/client/certifications'
 
 module RiseUp
   class ExpiredTokenError < StandardError; end
@@ -53,6 +55,7 @@ module RiseUp
     include RiseUp::Client::Authentication
     include RiseUp::Client::CourseRegistrations
     include RiseUp::Client::CourseRequests
+    include RiseUp::Client::Certifications
     include RiseUp::Client::Courses
     include RiseUp::Client::TrainingPathSubscriptions
     include RiseUp::Client::Trainings
