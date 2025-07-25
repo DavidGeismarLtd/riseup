@@ -5,10 +5,10 @@ module RiseUp
     # use to be traininsubscriptions
     # now is courseregistrations
     module CourseRegistrations
-      BASE = '/courseregistrations/monetisation'
+      BASE = '/courseregistrations'
       def create_course_registration(user_id, course_id, options = {})
         request(ApiResource::CourseRegistration) do
-          self.class.post("#{@base_uri}/#{BASE}", {
+          self.class.post("#{@base_uri}/courseregistrations/monetisation", {
                             body: options.merge(iduser: user_id, idtraining: course_id).to_json,
                             headers: {
                               'Authorization' => "Bearer #{access_token}",
