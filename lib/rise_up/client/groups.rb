@@ -45,6 +45,18 @@ module RiseUp
         retrieve_with_pagination(BASE, options, ApiResource::Group)
       end
 
+      def retrieve_group(group_id, options={})
+        request(ApiResource::CourseRegistration) do
+         self.class.get("#{@base_uri}/#{BASE}/#{group_id}", {
+                                     query: options,
+                                     headers: {
+                                       'Authorization' => "Bearer #{access_token}",
+                                       'Content-Type' => 'application/json'
+                                     }
+                                   })
+         end
+      end
+
       def retrieve_groups(options = {})
         request(ApiResource::Group) do
          self.class.get("#{@base_uri}/#{BASE}", {

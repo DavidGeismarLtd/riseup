@@ -5,7 +5,7 @@ module RiseUp
     module Courses
       BASE = '/courses'
 
-      def get_course(course_id)
+      def retrieve_course(course_id)
         request(ApiResource::Course) do
           self.class.get("#{@base_uri}/#{BASE}/#{course_id}", {
                                       headers: {
