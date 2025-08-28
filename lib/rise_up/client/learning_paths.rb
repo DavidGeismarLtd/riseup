@@ -8,7 +8,7 @@ module RiseUp
 
       def retrieve_learning_path(learning_path_id, options={})
         request(ApiResource::LearningPath) do
-         self.class.get("#{@base_uri}/#{BASE}/#{group_id}", {
+         self.class.get("#{@base_uri}/#{BASE}/#{learning_path_id}", {
                                      query: options,
                                      headers: {
                                        'Authorization' => "Bearer #{access_token}",
