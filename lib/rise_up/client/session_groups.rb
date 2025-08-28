@@ -5,7 +5,7 @@ module RiseUp
     module SessionGroups
       BASE = '/trainingsessions'
 
-      def get_session_group(session_group_id)
+      def retrieve_session_group(session_group_id)
          request(ApiResource::SessionGroup) do
            self.class.get("#{@base_uri}/#{BASE}/#{session_group_id}", {
                                        headers: {
