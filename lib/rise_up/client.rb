@@ -229,14 +229,16 @@ module RiseUp
 
     # Handle collisions like :club_d_affiliation repeated
     def dedupe_key(sym)
-      return sym unless instance_variable_defined?("@#{sym}") || respond_to?(sym)
+      # before: return sym unless instance_variable_defined?("@#{sym}") || respond_to?(sym)
+      return sym unless instance_variable_defined?("@#{sym}")
       i = 2
       loop do
         candidate = :"#{sym}_#{i}"
-        return candidate unless instance_variable_defined?("@#{candidate}") || respond_to?(candidate)
+        return candidate unless instance_variable_defined?("@#{candidate}")
         i += 1
       end
     end
+
 
 
     def handle_response(parsed_body, resource)
