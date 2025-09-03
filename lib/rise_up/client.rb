@@ -102,21 +102,10 @@ module RiseUp
       }
     }.freeze
 
-    def initialize(options = {})
-      @__aliases = {}   # "original key" => normalized_symbol
-      @__raw     = {}   # original key/value store (optional but handy)
-
-      options.each do |key, value|
-        @__raw[key.to_s] = value
-
-        normalized = normalize_key(key)
-        normalized = dedupe_key(normalized)
-
-        @__aliases[key.to_s] = normalized
-        define_singleton_reader(normalized)
-
-        instance_variable_set("@#{normalized}", value)
-      end
+     def initialize(options = {})
+        options.each do |key, value|
+          instance_variable_set("@#{key}", value)
+        end
 
       mode = options.fetch(:mode, 'production').to_sym
       cloud = options.fetch(:cloud, 'aws').to_sym
@@ -184,19 +173,8 @@ module RiseUp
       end
     end
 
-
-    # Look up using the original API label
-    def [](label)
-      sym = @__aliases[label.to_s]
-      sym ? instance_variable_get("@#{sym}") : nil
-    end
-
-    # Optional: enumerate normalized + original names
-    def fields
-      @__aliases.transform_values(&:to_s)
-    end
-
     private
+<<<<<<< HEAD
     
     def define_singleton_reader(name)
       return if respond_to?(name)
@@ -239,6 +217,8 @@ module RiseUp
       end
     end
 
+=======
+>>>>>>> parent of 9109779 (fix)
 
 
     def handle_response(parsed_body, resource)
