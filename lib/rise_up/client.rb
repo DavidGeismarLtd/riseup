@@ -102,10 +102,21 @@ module RiseUp
       }
     }.freeze
 
-     def initialize(options = {})
-        options.each do |key, value|
-          instance_variable_set("@#{key}", value)
-        end
+    def initialize(options = {})
+      @__aliases = {}   # "original key" => normalized_symbol
+      @__raw     = {}   # original key/value store (optional but handy)
+
+      options.each do |key, value|
+        @__raw[key.to_s] = value
+
+        normalized = normalize_key(key)
+        normalized = dedupe_key(normalized)
+
+        @__aliases[key.to_s] = normalized
+        define_singleton_reader(normalized)
+
+        instance_variable_set("@#{normalized}", value)
+      end
 
       mode = options.fetch(:mode, 'production').to_sym
       cloud = options.fetch(:cloud, 'aws').to_sym
@@ -173,7 +184,60 @@ module RiseUp
       end
     end
 
+
+    # Look up using the original API label
+    def [](label)
+      sym = @__aliases[label.to_s]
+      sym ? instance_variable_get("@#{sym}") : nil
+    end
+
+    # Optional: enumerate normalized + original names
+    def fields
+      @__aliases.transform_values(&:to_s)
+    end
+
     private
+    
+    def define_singleton_reader(name)
+      return if respond_to?(name)
+      singleton_class.class_eval { attr_reader name }
+    end
+
+    # Turn "Club d'affiliation" → :club_d_affiliation
+    # Turn "Niveau juge"       → :niveau_juge
+    # Ensure it starts with [a-z_] and contains only [a-z0-9_]
+    def normalize_key(key)
+      s = key.to_s
+
+      # Prefer ActiveSupport transliteration if available, else Unicode fallback
+      s = if defined?(ActiveSupport::Inflector)
+            ActiveSupport::Inflector.transliterate(s)
+          else
+            # Remove diacritics using Unicode NFKD decomposition
+            s = s.unicode_normalize(:nfkd)
+            s.encode('ASCII', replace: '', undef: :replace, invalid: :replace)
+          end
+
+      s = s.downcase
+          .gsub(/[^\w]/, '_')   # spaces, quotes, punctuation → _
+          .gsub(/_{2,}/, '_')   # collapse multiple _
+          .gsub(/^_+|_+$/, '')  # trim leading/trailing _
+      s = "_#{s}" unless s.match?(/\A[a-z_]/) # must start with letter or _
+      s = "field" if s.empty?
+      s.to_sym
+    end
+
+    # Handle collisions like :club_d_affiliation repeated
+    def dedupe_key(sym)
+      return sym unless instance_variable_defined?("@#{sym}") || respond_to?(sym)
+      i = 2
+      loop do
+        candidate = :"#{sym}_#{i}"
+        return candidate unless instance_variable_defined?("@#{candidate}") || respond_to?(candidate)
+        i += 1
+      end
+    end
+
 
     def handle_response(parsed_body, resource)
       case parsed_body
