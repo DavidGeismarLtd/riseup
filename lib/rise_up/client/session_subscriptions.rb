@@ -3,7 +3,7 @@ module RiseUp
     module SessionSubscriptions
       BASE = '/sessionsubscriptions'
 
-      def get_session_subscriptions(session_id)
+      def retrieve_session_subscriptions_by_session_id(session_id)
          request(ApiResource::SessionSubscription) do
            self.class.get("#{@base_uri}/#{BASE}/#{session_id}", {
                                        headers: {
